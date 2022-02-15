@@ -1,8 +1,8 @@
 {
   "name": "date-spoofer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Spoofing dates for browser & node",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "cross-env APP_LOG=false jest --env=node --testRunner='jest-circus/runner' --coverage=true --testMatch='**/test/**/*.spec.js'"
   },
