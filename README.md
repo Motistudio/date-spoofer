@@ -18,7 +18,7 @@ and
 ```javascript
 const DateSpoofer = require('date-spoofer')
 // or
-import {create, restore} from 'date-spoofer')
+import {create, restore} from 'date-spoofer'
 ```
 
 ## Usage
