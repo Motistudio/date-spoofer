@@ -85,3 +85,10 @@ AlternativeDate.restore()
 // in any case, a global restore is always an option
 DateSpoofer.restore()
 ```
+
+## Test
+100% code coverage
+
+```bash
+npm test
+```
