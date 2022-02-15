@@ -1,0 +1,39 @@
+{
+  "name": "date-spoofer",
+  "version": "1.0.0",
+  "description": "Spoofing dates for browser & node",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env APP_LOG=false jest --env=node --testRunner='jest-circus/runner' --coverage=true --testMatch='**/test/**/*.spec.js'"
+  },
+  "keywords": [
+    "date",
+    "mock",
+    "spoof",
+    "fake",
+    "time",
+    "timestamp",
+    "now"
+  ],
+  "author": "Moti Shriki",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "babel-jest": "^27.5.1",
+    "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.9.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "jest": "^27.5.1",
+    "jest-circus": "^27.5.1"
+  },
+  "dependencies": {
+    "the-global-object": "^1.0.2"
+  }
+}
