@@ -59,7 +59,7 @@ DateSpoofer.create((time) => {
 DateSpoofer.restore() // always nice to clean up
 ```
 
-It's important to notice that `create()` is returning a new Date class, which you don't actually have to implement
+It's important to notice that `create()` is returning a new Date class, which you don't actually have to apply as default:
 
 ```javascript
 const DateSpoofer = require('date-spoofer')
@@ -71,7 +71,7 @@ console.log(AlternativeDate.now() === Date.now()) // false
 console.log((new AlternativeDate().getTime()) === (new Date().getTime())) // false
 ```
 
-With this instance, we can apply it as default when we want
+With this instance, of course, we can apply it as default whenever we want
 ```javascript
 AlternativeDate.apply()
 
@@ -84,6 +84,30 @@ AlternativeDate.restore()
 
 // in any case, a global restore is always an option
 DateSpoofer.restore()
+```
+
+## Specific times
+
+It's also important to notice that this library will abstract only the current date!
+It means only `new Date()` with no argument and `Date.now()` will produce the modified date. Calling `new Date(timestamp)` will create this very timestamp.
+```javascript
+DateSpoofer.create((time) => time - 1000).apply()
+
+Date.now() // a second ago
+new Date() // a second ago
+new Date(0) // Jan 1st, 1970
+```
+
+However, if you need dynamic creation for all of the dates, `create()` accepts a second options argument exactly for that.
+But keep in mind though that every creation from another date is changing what you're getting, which might be an issue.
+```javascript
+DateSpoofer.create((time) => time - 1000, {modifyEveryCreation: true}).apply()
+
+Date.now() // a second ago
+new Date() // a second ago
+new Date(0) // -1000
+new Date(Date.now()) // two seconds ago
+new Date((new Date((new Date()).getTime())).getTime()) // three seconds ago
 ```
 
 ## Test

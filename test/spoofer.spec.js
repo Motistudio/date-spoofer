@@ -36,6 +36,40 @@ describe('Spoofer', () => {
     expect(toSec(AlternateDate.now())).toBe(toSec(modify(Date.now())))
   })
 
+  test('Should create specific date with no abstraction', () => {
+    const modify = createMargin(-(1000 * 60 * 60 * 24 * 7 * 30))
+    const AlternateDate = createSpoofer(modify)
+    const date = new Date()
+    const newDate = new AlternateDate()
+    const specificDate = new AlternateDate(newDate.getTime())
+
+    expect(toSec(newDate.getTime())).toBe(toSec(modify(date.getTime())))
+    expect(specificDate.getTime()).toBe(newDate.getTime())
+  })
+
+  test('Should create specific date with no abstraction (with configuration)', () => {
+    const modify = createMargin(-(1000 * 60 * 60 * 24 * 7 * 30))
+    const AlternateDate = createSpoofer(modify, {modifyEveryCreation: false})
+    const date = new Date()
+    const newDate = new AlternateDate()
+    const specificDate = new AlternateDate(newDate.getTime())
+
+    expect(toSec(newDate.getTime())).toBe(toSec(modify(date.getTime())))
+    expect(specificDate.getTime()).toBe(newDate.getTime())
+  })
+
+  test('Should create specific date with abstraction (with configuration)', () => {
+    const modify = createMargin(-(1000 * 60 * 60 * 24 * 7 * 30))
+    const AlternateDate = createSpoofer(modify, {modifyEveryCreation: true})
+    const date = new Date()
+    const newDate = new AlternateDate()
+    const specificDate = new AlternateDate(newDate.getTime())
+
+    expect(toSec(newDate.getTime())).toBe(toSec(modify(date.getTime())))
+    expect(specificDate.getTime()).not.toBe(newDate.getTime())
+    expect(specificDate.getTime()).toBe(modify(newDate.getTime()))
+  })
+
   test('Should apply to global object', () => {
     const AlternateDate = createSpoofer()
     const OriginDate = global.Date

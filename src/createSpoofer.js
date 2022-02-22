@@ -4,19 +4,26 @@ const OriginDate = Date
 
 const noop = (arg) => arg
 
-const createSpoofer = (modify) => {
+const defaultOptions = {
+  modifyEveryCreation: false
+}
+
+const createSpoofer = (modify, options) => {
   const modifyTime = modify || noop
+
+  const {modifyEveryCreation} = {...defaultOptions, ...options}
 
   /**
    * An alternate constructor
    * @param {...any} args - Date constructor args
    */
-  const constructor = function (...args) {
-    // originConstructor.call(this, ...args)
-    const currentTime = this.getTime()
-    const alternateTime = modifyTime(currentTime)
-    if (currentTime !== alternateTime) {
-      this.setTime(alternateTime)
+  const constructor = function (arg) {
+    if (!arg || modifyEveryCreation) {
+      const currentTime = this.getTime()
+      const alternateTime = modifyTime(currentTime)
+      if (currentTime !== alternateTime) {
+        this.setTime(alternateTime)
+      }
     }
   }
 
